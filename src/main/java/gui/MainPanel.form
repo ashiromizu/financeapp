@@ -23,9 +23,9 @@
                   <Group type="102" attributes="0">
                       <Component id="jTextField1" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" min="-2" pref="76" max="-2" attributes="0"/>
+                      <Component id="currencyComboBox" min="-2" pref="76" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jComboBox2" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="typeComboBox" min="-2" pref="135" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -40,9 +40,9 @@
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextField1" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="currencyComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="typeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="581" max="32767" attributes="0"/>
@@ -90,6 +90,9 @@
               <Subbinding sourcePath="${amountCurrency}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="enums.Currency.class"/>
               </Subbinding>
+              <Subbinding sourcePath="${date}">
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+              </Subbinding>
             </BindingProperty>
           </BindingProperties>
         </Component>
@@ -109,24 +112,25 @@
       </Properties>
       <Events>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextField1FocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextField1FocusLost"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="currencyComboBox">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Currency"/>
       </Properties>
       <BindingProperties>
-        <BindingProperty name="elements" source="Form" sourcePath="${bigModel.currencies}" target="jComboBox1" targetPath="elements" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="selectedItem" source="Form" sourcePath="${selectedCurrency}" target="jComboBox1" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="elements" source="Form" sourcePath="${bigModel.currencies}" target="currencyComboBox" targetPath="elements" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="selectedItem" source="Form" sourcePath="${selectedCurrency}" target="currencyComboBox" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
+    <Component class="javax.swing.JComboBox" name="typeComboBox">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Type"/>
       </Properties>
       <BindingProperties>
-        <BindingProperty name="elements" source="Form" sourcePath="${bigModel.types}" target="jComboBox2" targetPath="elements" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="selectedItem" source="Form" sourcePath="${selectedType}" target="jComboBox2" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="elements" source="Form" sourcePath="${bigModel.types}" target="typeComboBox" targetPath="elements" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="selectedItem" source="Form" sourcePath="${selectedType}" target="typeComboBox" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
   </SubComponents>

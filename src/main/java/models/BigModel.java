@@ -4,6 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,13 +31,13 @@ public class BigModel {
 	public List<Currency> getCurrencies() {
 		return Arrays.asList(Currency.values());
 	}
-	
+
 	public List<Type> getTypes() {
 		return Arrays.asList(Type.values());
 	}
 
-	public void add(double amount, Currency selectedCurrency, Type selectedType) {
-		Transaction transaction = new Transaction(new Amount(amount, selectedCurrency), selectedType);
+	public void add(double amount, Currency selectedCurrency, Type selectedType, Date timestamp) {
+		Transaction transaction = new Transaction(new Amount(amount, selectedCurrency), selectedType, timestamp);
 		transaction.setUuid(UUID.randomUUID().toString());
 		transactions.put(transaction.getUuid(), transaction);
 		listenerSupport.firePropertyChange("transactions", false, true);
@@ -46,8 +47,8 @@ public class BigModel {
 		listenerSupport.addPropertyChangeListener(listener);
 	}
 
-	public void removePropertyChangeListener(PropertyChangeListener listener)  {
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		listenerSupport.removePropertyChangeListener(listener);
 	}
-	
+
 }
