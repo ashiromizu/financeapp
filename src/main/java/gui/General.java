@@ -6,7 +6,7 @@ import models.BigModel;
 public class General {
 
 	public static void main(String[] args) {
-		JFrame mainWindow = new JFrame("Welcome to your expenses app Akira");
+		JFrame mainWindow = new JFrame("The Expenses App");
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainPanel mainPanel = new MainPanel(new BigModel());
 		mainWindow.getContentPane().add(mainPanel);
