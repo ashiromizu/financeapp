@@ -3,7 +3,7 @@ package types;
 import enums.Currency;
 
 public class Amount {
-
+	
 	private Currency currency;
 	private double valueOfTheTransaction;
 

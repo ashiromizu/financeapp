@@ -32,7 +32,11 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelAmount" min="-2" max="-2" attributes="0"/>
-                          <Component id="jMonthlyAverageText" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jTypeOutputComboBox" min="-2" pref="141" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jOutputText" min="-2" pref="121" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -55,9 +59,12 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="268" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              <Component id="jMonthlyAverageText" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="256" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jOutputText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTypeOutputComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="298" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -132,7 +139,7 @@
       </Properties>
       <BindingProperties>
         <BindingProperty name="elements" source="Form" sourcePath="${bigModel.currencies}" target="jCurrencyComboBox" targetPath="elements" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="selectedItem" source="Form" sourcePath="${selectedCurrency}" target="jCurrencyComboBox" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="selectedItem" source="Form" sourcePath="${bigModel.selectedCurrency}" target="jCurrencyComboBox" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jTypeComboBox">
@@ -141,7 +148,7 @@
       </Properties>
       <BindingProperties>
         <BindingProperty name="elements" source="Form" sourcePath="${bigModel.types}" target="jTypeComboBox" targetPath="elements" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="selectedItem" source="Form" sourcePath="${selectedType}" target="jTypeComboBox" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="selectedItem" source="Form" sourcePath="${bigModel.selectedType}" target="jTypeComboBox" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelAmount">
@@ -149,10 +156,28 @@
         <Property name="text" type="java.lang.String" value="amount"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jMonthlyAverageText">
+    <Component class="javax.swing.JTextField" name="jOutputText">
+      <BindingProperties>
+        <BindingProperty name="text" source="Form" sourcePath="${bigModel.selectedTypeTotal}" target="jOutputText" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+        </BindingProperty>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jTypeOutputComboBox">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Monthly Average"/>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
       </Properties>
+      <BindingProperties>
+        <BindingProperty name="elements" source="Form" sourcePath="${bigModel.types}" target="jTypeOutputComboBox" targetPath="elements" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="selectedItem" source="Form" sourcePath="${bigModel.selectedTypeOutput}" target="jTypeOutputComboBox" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
   </SubComponents>
 </Form>
