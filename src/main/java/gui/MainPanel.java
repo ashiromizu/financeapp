@@ -1,6 +1,8 @@
 package gui;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -205,7 +207,7 @@ public class MainPanel extends JPanel {
 		System.out.println("the timestamp is " + timestamp);
 		double amount = Double.parseDouble(amountStr);
 		model.add(amount, model.getSelectedCurrency(), model.getSelectedType(), timestamp);
-		// TODO add the last value in the top of the list
+//		model.getSelectedTypeTotal();
 
 	}// GEN-LAST:event_jButton1ActionPerformed
 
