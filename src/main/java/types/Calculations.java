@@ -16,7 +16,7 @@ public class Calculations {
 			if (trans.get(i).getType() == type)
 				total = total + amountInNok;
 		}
-		System.out.println("Sum of all elements of the type is " + total);
+		System.out.println("Sum of all " + type + " expenses is " + total);
 		return total;
 	}
 

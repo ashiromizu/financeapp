@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.swing.JPanel;
 
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
+
 import types.Amount;
 import types.Calculations;
 import types.Transaction;
@@ -51,141 +53,143 @@ public class MainPanel extends JPanel {
 	// <editor-fold defaultstate="collapsed"
 	// <editor-fold defaultstate="collapsed"
 	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
-		bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+	// <editor-fold defaultstate="collapsed"
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jTable1 = new javax.swing.JTable();
-		jAddInputButton = new javax.swing.JButton();
-		jAmountText = new javax.swing.JTextField();
-		jCurrencyComboBox = new javax.swing.JComboBox();
-		jTypeComboBox = new javax.swing.JComboBox();
-		jLabelAmount = new javax.swing.JLabel();
-		jOutputText = new javax.swing.JTextField();
-		jTypeOutputComboBox = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jAddInputButton = new javax.swing.JButton();
+        jAmountText = new JNumberTextField(8,3);
+        jCurrencyComboBox = new javax.swing.JComboBox();
+        jTypeComboBox = new javax.swing.JComboBox();
+        jLabelAmount = new javax.swing.JLabel();
+        jOutputText = new javax.swing.JTextField();
+        jTypeOutputComboBox = new javax.swing.JComboBox();
 
-		org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bigModel.transactions}");
-		org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this,
-				eLProperty, jTable1);
-		org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${type}"));
-		columnBinding.setColumnName("Type");
-		columnBinding.setColumnClass(enums.Type.class);
-		columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${amountValue}"));
-		columnBinding.setColumnName("Amount Value");
-		columnBinding.setColumnClass(Double.class);
-		columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${amountCurrency}"));
-		columnBinding.setColumnName("Amount Currency");
-		columnBinding.setColumnClass(enums.Currency.class);
-		columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${date}"));
-		columnBinding.setColumnName("Date");
-		columnBinding.setColumnClass(java.util.Date.class);
-		bindingGroup.addBinding(jTableBinding);
-		jTableBinding.bind();
-		jScrollPane1.setViewportView(jTable1);
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bigModel.transactions}");
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, jTable1);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${type}"));
+        columnBinding.setColumnName("Type");
+        columnBinding.setColumnClass(enums.Type.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${amountValue}"));
+        columnBinding.setColumnName("Amount Value");
+        columnBinding.setColumnClass(Double.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${amountCurrency}"));
+        columnBinding.setColumnName("Amount Currency");
+        columnBinding.setColumnClass(enums.Currency.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${date}"));
+        columnBinding.setColumnName("Date");
+        columnBinding.setColumnClass(java.util.Date.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(jTable1);
 
-		jAddInputButton.setText("Add input");
-		jAddInputButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jAddInputButtonActionPerformed(evt);
-			}
-		});
+        jAddInputButton.setText("Add input");
+        jAddInputButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAddInputButtonActionPerformed(evt);
+            }
+        });
 
-		jAmountText.setText("Amount");
-		jAmountText.addFocusListener(new java.awt.event.FocusAdapter() {
-			public void focusGained(java.awt.event.FocusEvent evt) {
-				jAmountTextFocusGained(evt);
-			}
+        jAmountText.setText("Amount");
+        jAmountText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jAmountTextFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jAmountTextFocusLost(evt);
+            }
+        });
+        jAmountText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jAmountTextKeyPressed(evt);
+            }
+        });
 
-			public void focusLost(java.awt.event.FocusEvent evt) {
-				jAmountTextFocusLost(evt);
-			}
-		});
+        jCurrencyComboBox.setToolTipText("Currency");
 
-		jCurrencyComboBox.setToolTipText("Currency");
+        eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bigModel.currencies}");
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, jCurrencyComboBox);
+        bindingGroup.addBinding(jComboBoxBinding);
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${bigModel.selectedCurrency}"), jCurrencyComboBox, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
 
-		eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bigModel.currencies}");
-		org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE,
-				this, eLProperty, jCurrencyComboBox);
-		bindingGroup.addBinding(jComboBoxBinding);
-		org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this,
-				org.jdesktop.beansbinding.ELProperty.create("${bigModel.selectedCurrency}"), jCurrencyComboBox, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
-		bindingGroup.addBinding(binding);
+        jTypeComboBox.setToolTipText("Type");
 
-		jTypeComboBox.setToolTipText("Type");
+        eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bigModel.types}");
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, jTypeComboBox);
+        bindingGroup.addBinding(jComboBoxBinding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${bigModel.selectedType}"), jTypeComboBox, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
 
-		eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bigModel.types}");
-		jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, jTypeComboBox);
-		bindingGroup.addBinding(jComboBoxBinding);
-		binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this,
-				org.jdesktop.beansbinding.ELProperty.create("${bigModel.selectedType}"), jTypeComboBox, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
-		bindingGroup.addBinding(binding);
+        jLabelAmount.setText("amount");
 
-		jLabelAmount.setText("amount");
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${bigModel.selectedTypeTotal}"), jOutputText, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
-		binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this,
-				org.jdesktop.beansbinding.ELProperty.create("${bigModel.selectedTypeTotal}"), jOutputText, org.jdesktop.beansbinding.BeanProperty.create("text"));
-		bindingGroup.addBinding(binding);
+        jTypeOutputComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-		jTypeOutputComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bigModel.types}");
+        jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, jTypeOutputComboBox);
+        bindingGroup.addBinding(jComboBoxBinding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${bigModel.selectedTypeOutput}"), jTypeOutputComboBox, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        bindingGroup.addBinding(binding);
 
-		eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bigModel.types}");
-		jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, jTypeOutputComboBox);
-		bindingGroup.addBinding(jComboBoxBinding);
-		binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this,
-				org.jdesktop.beansbinding.ELProperty.create("${bigModel.selectedTypeOutput}"), jTypeOutputComboBox, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
-		bindingGroup.addBinding(binding);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jAmountText, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jCurrencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jAddInputButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelAmount)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTypeOutputComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jOutputText, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabelAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jAmountText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCurrencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jAddInputButton)
+                    .addComponent(jTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jOutputText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTypeOutputComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(298, Short.MAX_VALUE))
+        );
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(
-										layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
-												.addGroup(
-														layout.createSequentialGroup().addComponent(jAmountText, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addGap(27, 27, 27).addComponent(jCurrencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addGap(32, 32, 32).addComponent(jTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-																.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																.addComponent(jAddInputButton))
-												.addGroup(
-														layout.createSequentialGroup()
-																.addGroup(
-																		layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																				.addComponent(jLabelAmount)
-																				.addGroup(
-																						layout.createSequentialGroup()
-																								.addComponent(jTypeOutputComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 141,
-																										javax.swing.GroupLayout.PREFERRED_SIZE)
-																								.addGap(18, 18, 18)
-																								.addComponent(jOutputText, javax.swing.GroupLayout.PREFERRED_SIZE, 121,
-																										javax.swing.GroupLayout.PREFERRED_SIZE))).addGap(0, 0, Short.MAX_VALUE))).addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				javax.swing.GroupLayout.Alignment.TRAILING,
-				layout.createSequentialGroup()
-						.addGap(17, 17, 17)
-						.addComponent(jLabelAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(
-								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-										.addComponent(jAmountText, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(jCurrencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(jAddInputButton)
-										.addComponent(jTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGap(18, 18, 18)
-						.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(
-								layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-										.addComponent(jOutputText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(jTypeOutputComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(298, Short.MAX_VALUE)));
+        bindingGroup.bind();
+    }// </editor-fold>//GEN-END:initComponents
 
-		bindingGroup.bind();
-	}// </editor-fold>//GEN-END:initComponents
+	private void jAmountTextKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jAmountTextKeyPressed
+		int key;
+		// key(evt, key);
+	}// GEN-LAST:event_jAmountTextKeyPressed
 
 	private void jAmountTextFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jAmountTextFocusLost
 		System.out.println("the amount was set to " + jAmountText.getText() + " " + model.getSelectedCurrency() + " " + model.getSelectedType());
@@ -205,16 +209,16 @@ public class MainPanel extends JPanel {
 
 	}// GEN-LAST:event_jButton1ActionPerformed
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton jAddInputButton;
-	private javax.swing.JTextField jAmountText;
-	private javax.swing.JComboBox jCurrencyComboBox;
-	private javax.swing.JLabel jLabelAmount;
-	private javax.swing.JTextField jOutputText;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTable jTable1;
-	private javax.swing.JComboBox jTypeComboBox;
-	private javax.swing.JComboBox jTypeOutputComboBox;
-	private org.jdesktop.beansbinding.BindingGroup bindingGroup;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jAddInputButton;
+    private javax.swing.JTextField jAmountText;
+    private javax.swing.JComboBox jCurrencyComboBox;
+    private javax.swing.JLabel jLabelAmount;
+    private javax.swing.JTextField jOutputText;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox jTypeComboBox;
+    private javax.swing.JComboBox jTypeOutputComboBox;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+    // End of variables declaration//GEN-END:variables
 }
