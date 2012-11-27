@@ -31,6 +31,7 @@ public class BigModel {
 		transactions = new ArrayList<Transaction>();
 		this.selectedCurrency = Currency.NOK;
 		this.selectedType = Type.Supermarket;
+		this.selectedTypeOutput = Type.Supermarket;
 	}
 
 	public List<Transaction> getTransactions() {
