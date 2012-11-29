@@ -4,17 +4,20 @@ import java.util.Date;
 
 import enums.Currency;
 import enums.Type;
+import enums.User;
 
 public class Transaction {
 	private String uuid;
 	private Amount amount;
 	private Type type;
 	private Date date;
+	private User user;
 	
-	public Transaction(Amount amount, Type type, Date timestamp) {
+	public Transaction(Amount amount, Type type, Date timestamp, User user) {
 		this.amount = amount;
 		this.type = type;
-		this.date=timestamp;
+		this.date = timestamp;
+		this.user = user;
 	}
 
 	public String getUuid() {
@@ -55,6 +58,14 @@ public class Transaction {
 
 	public Currency getAmountCurrency() {
 		return amount.getCurrency();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

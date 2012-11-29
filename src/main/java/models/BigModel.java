@@ -16,6 +16,7 @@ import types.Calculations;
 import types.Transaction;
 import enums.Currency;
 import enums.Type;
+import enums.User;
 
 public class BigModel {
 	private ArrayList<Transaction> transactions;
@@ -23,6 +24,8 @@ public class BigModel {
 	private Currency selectedCurrency;
 	private Type selectedType;
 	private Type selectedTypeOutput;
+	private User selectedUser;
+
 
 	private PropertyChangeSupport listenerSupport;
 
@@ -32,6 +35,7 @@ public class BigModel {
 		this.selectedCurrency = Currency.NOK;
 		this.selectedType = Type.Supermarket;
 		this.selectedTypeOutput = Type.Supermarket;
+		this.selectedUser = User.Akira;
 	}
 
 	public List<Transaction> getTransactions() {
@@ -45,13 +49,18 @@ public class BigModel {
 	public List<Type> getTypes() {
 		return Arrays.asList(Type.values());
 	}
+	
+	public List<User> getUser(){
+		return Arrays.asList(User.values());
+	}
 
-	public void add(double amount, Currency selectedCurrency, Type selectedType, Date timestamp) {
-		Transaction transaction = new Transaction(new Amount(amount, selectedCurrency), selectedType, timestamp);
+	public void add(double amount, Currency selectedCurrency, Type selectedType, Date timestamp, User selectedUser) {
+		Transaction transaction = new Transaction(new Amount(amount, selectedCurrency), selectedType, timestamp, selectedUser);
 		transaction.setUuid(UUID.randomUUID().toString());
 		transactions.add(0, transaction);
 		listenerSupport.firePropertyChange("transactions", false, true);
-		// it should add the last input in the top of the list.
+		listenerSupport.firePropertyChange("selectedTypeTotal", false, true);
+		listenerSupport.firePropertyChange("selectedUser", false, true);
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -82,6 +91,7 @@ public class BigModel {
 	public void setSelectedType(Type val) {
 		this.selectedType = val;
 		System.out.println("i'm being set to " + val);
+		listenerSupport.firePropertyChange("selectedType", false, true);
 	}
 
 	public void setSelectedTypeOutput(Type val) {
@@ -95,4 +105,13 @@ public class BigModel {
 		return total;
 	}
 
+	public User getSelectedUser() {
+		return selectedUser;
+	}
+	
+	public void setSelectedUser(User val) {
+		this.selectedUser = val;
+		System.out.println("the user is set to " + val);
+		listenerSupport.firePropertyChange("selectedUser", 0, 1);
+	}
 }
