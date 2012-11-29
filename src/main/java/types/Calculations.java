@@ -1,6 +1,9 @@
 package types;
 
+import java.util.Date;
 import java.util.List;
+
+import org.joda.time.Days;
 
 import enums.Currency;
 import enums.Type;
@@ -18,6 +21,15 @@ public class Calculations {
 		}
 		System.out.println("Sum of all " + type + " expenses is " + total);
 		return total;
+	}
+
+	public double getAverages(List<Transaction> trans, Type type) {
+		long firstDay = trans.get(0).getDate().getTime();
+		long lastDay = System.currentTimeMillis();
+		int days = (int) ((lastDay-firstDay)/(24*60*60*1000));
+		
+		double dailyAvg = getTotal(trans, type)/days;
+		return dailyAvg;
 	}
 
 }
