@@ -139,7 +139,7 @@ public class MainPanel extends JPanel {
         bindingGroup.addBinding(binding);
 
         jComboBoxTypeOutput.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxTypeOutput.setToolTipText("Type2");
+        jComboBoxTypeOutput.setToolTipText("null");
 
         eLProperty = org.jdesktop.beansbinding.ELProperty.create("${bigModel.types}");
         jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, eLProperty, jComboBoxTypeOutput);

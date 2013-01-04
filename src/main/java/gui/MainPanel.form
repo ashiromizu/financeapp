@@ -221,7 +221,7 @@
             <StringItem index="3" value="Item 4"/>
           </StringArray>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Type2"/>
+        <Property name="toolTipText" type="java.lang.String" value="null"/>
       </Properties>
       <BindingProperties>
         <BindingProperty name="elements" source="Form" sourcePath="${bigModel.types}" target="jComboBoxTypeOutput" targetPath="elements" updateStrategy="0" immediately="false"/>
