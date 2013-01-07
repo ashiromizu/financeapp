@@ -2,6 +2,7 @@ package models;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -19,8 +20,7 @@ import enums.Type;
 import enums.User;
 
 public class BigModel {
-	private ArrayList<Transaction> transactions;
-
+	private ExpensesDatabase expenses;
 	private Currency selectedCurrency;
 	private Type selectedType;
 	private Type selectedTypeOutput;
@@ -29,9 +29,9 @@ public class BigModel {
 
 	private PropertyChangeSupport listenerSupport;
 
-	public BigModel() {
+	public BigModel(ExpensesDatabase expenses) {
 		listenerSupport = new PropertyChangeSupport(this);
-		transactions = new ArrayList<Transaction>();
+		this.expenses = expenses;
 		this.selectedCurrency = Currency.NOK;
 		this.selectedType = Type.Supermarket;
 		this.selectedTypeOutput = Type.Supermarket;
@@ -39,7 +39,7 @@ public class BigModel {
 	}
 
 	public List<Transaction> getTransactions() {
-		return new ArrayList<Transaction>(transactions);
+		return new ArrayList<Transaction>(expenses.getTransaction());
 	}
 
 	public List<Currency> getCurrencies() {
@@ -55,9 +55,7 @@ public class BigModel {
 	}
 
 	public void add(double amount, Currency selectedCurrency, Type selectedType, Date timestamp, User selectedUser) {
-		Transaction transaction = new Transaction(new Amount(amount, selectedCurrency), selectedType, timestamp, selectedUser);
-		transaction.setUuid(UUID.randomUUID().toString());
-		transactions.add(0, transaction);
+		expenses.add(amount, selectedCurrency, selectedType, timestamp, selectedUser);
 		listenerSupport.firePropertyChange("transactions", false, true);
 		listenerSupport.firePropertyChange("selectedTypeTotal", false, true);
 		listenerSupport.firePropertyChange("selectedUser", false, true);
