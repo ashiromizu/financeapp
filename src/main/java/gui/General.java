@@ -2,8 +2,9 @@ package gui;
 
 import javax.swing.JFrame;
 
+import types.ExpensesDatabase;
+
 import models.BigModel;
-import models.ExpensesDatabase;
 
 public class General {
 

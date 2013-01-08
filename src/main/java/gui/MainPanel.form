@@ -84,8 +84,8 @@
                   <Component id="jComboBoxUser" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="268" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="449" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jComboBoxTypeOutput" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -105,7 +105,7 @@
                   <Component id="jTextAverageYear" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelAveragePerDay" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="222" max="32767" attributes="0"/>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -205,6 +205,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextOutput">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <BindingProperties>
         <BindingProperty name="text" source="Form" sourcePath="${bigModel.selectedTypeTotal}" target="jTextOutput" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
@@ -221,7 +224,6 @@
             <StringItem index="3" value="Item 4"/>
           </StringArray>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="null"/>
       </Properties>
       <BindingProperties>
         <BindingProperty name="elements" source="Form" sourcePath="${bigModel.types}" target="jComboBoxTypeOutput" targetPath="elements" updateStrategy="0" immediately="false"/>
@@ -229,10 +231,24 @@
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextAverageDay">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="text" source="Form" sourcePath="${bigModel.averagePerDay}" target="jTextAverageDay" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+        </BindingProperty>
+      </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextAverageMonth">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextAverageYear">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelAveragePerDay">
       <Properties>

@@ -24,12 +24,24 @@ public class Calculations {
 	}
 
 	public double getAverages(List<Transaction> trans, Type type) {
+		double dailyAvg = Double.NaN;
+		if ( trans.size() == 0){
+			return Double.NaN;
+		}
+	
 		long firstDay = trans.get(0).getDate().getTime();
 		long lastDay = System.currentTimeMillis();
 		int days = (int) ((lastDay-firstDay)/(24*60*60*1000));
 		
-		double dailyAvg = getTotal(trans, type)/days;
-		return dailyAvg;
+		if ( days >1 ){
+			dailyAvg = getTotal(trans, type)/days;
+			System.out.println(" and the average per day is " + dailyAvg);
+			return dailyAvg;
+		}
+		
+		return 0;
+		
+		
 	}
-
+	
 }

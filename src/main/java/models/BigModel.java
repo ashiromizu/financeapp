@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import types.Amount;
 import types.Calculations;
+import types.ExpensesDatabase;
 import types.Transaction;
 import enums.Currency;
 import enums.Type;
@@ -59,6 +60,7 @@ public class BigModel {
 		listenerSupport.firePropertyChange("transactions", false, true);
 		listenerSupport.firePropertyChange("selectedTypeTotal", false, true);
 		listenerSupport.firePropertyChange("selectedUser", false, true);
+		listenerSupport.firePropertyChange("averagePerDay", false, true);
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -92,15 +94,23 @@ public class BigModel {
 		listenerSupport.firePropertyChange("selectedType", false, true);
 	}
 
-	public void setSelectedTypeOutput(Type val) {
+	public double setSelectedTypeOutput(Type val) {
 		this.selectedTypeOutput = val;
 		System.out.println("The total calculated for " + val + " is ");
 		listenerSupport.firePropertyChange("selectedTypeTotal", 0, 1);
+		
+		double avgDay = new Calculations().getAverages(getTransactions(), selectedTypeOutput);
+		return avgDay;
 	}
 
 	public double getSelectedTypeTotal() {
 		double total = new Calculations().getTotal(getTransactions(), selectedTypeOutput);
 		return total;
+	}
+	
+	public double getAveragePerDay() {
+		double avgDay = new Calculations().getAverages(getTransactions(), selectedTypeOutput);
+		return avgDay;
 	}
 
 	public User getSelectedUser() {
