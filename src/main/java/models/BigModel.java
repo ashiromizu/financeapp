@@ -15,6 +15,7 @@ import java.util.UUID;
 import types.Amount;
 import types.Calculations;
 import types.ExpensesDatabase;
+import types.Saving;
 import types.Transaction;
 import enums.Currency;
 import enums.Type;
@@ -38,9 +39,14 @@ public class BigModel {
 		this.selectedTypeOutput = Type.Supermarket;
 		this.selectedUser = User.Akira;
 	}
+	
+	public void doTheSave() {
+		Saving saving = new Saving(expenses);
+		saving.saveFile();
+	}
 
 	public List<Transaction> getTransactions() {
-		return new ArrayList<Transaction>(expenses.getTransaction());
+		return new ArrayList<Transaction>(expenses.getTransactions());
 	}
 
 	public List<Currency> getCurrencies() {
@@ -61,6 +67,7 @@ public class BigModel {
 		listenerSupport.firePropertyChange("selectedTypeTotal", false, true);
 		listenerSupport.firePropertyChange("selectedUser", false, true);
 		listenerSupport.firePropertyChange("averagePerDay", false, true);
+		doTheSave();
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {

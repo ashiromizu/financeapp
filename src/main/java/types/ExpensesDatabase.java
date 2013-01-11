@@ -16,7 +16,7 @@ public class ExpensesDatabase {
 		transactions = new ArrayList<Transaction>();
 	}
 
-	public List<Transaction> getTransaction() {
+	public List<Transaction> getTransactions() {
 		return transactions;
 	}
 
