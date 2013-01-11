@@ -15,7 +15,7 @@ import java.util.UUID;
 import types.Amount;
 import types.Calculations;
 import types.ExpensesDatabase;
-import types.Saving;
+import types.SaveToXMLFile;
 import types.Transaction;
 import enums.Currency;
 import enums.Type;
@@ -41,7 +41,7 @@ public class BigModel {
 	}
 	
 	public void doTheSave() {
-		Saving saving = new Saving(expenses);
+		SaveToXMLFile saving = new SaveToXMLFile(expenses);
 		saving.saveFile();
 	}
 
