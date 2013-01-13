@@ -293,7 +293,11 @@ public class MainPanel extends JPanel {
 	}// GEN-LAST:event_jTextField1FocusGained
 
 	private void jButtonAddInputActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-//		if (jTextAmount.getText() != null)
+
+		//try try-catch to catch the error while the jTextAmount is empty
+		if (jTextAmount.getText().isEmpty()) {
+			jTextAmount.setFocusable(true);
+		}
 		String amountStr = jTextAmount.getText();
 		Date timestamp = new Date(System.currentTimeMillis());
 		System.out.println("the timestamp is " + timestamp);
@@ -302,6 +306,7 @@ public class MainPanel extends JPanel {
 		jTextAmount.setText(null);
 	}// GEN-LAST:event_jButton1ActionPerformed
 
+	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddInput;
     private javax.swing.JComboBox jComboBoxCurrency;

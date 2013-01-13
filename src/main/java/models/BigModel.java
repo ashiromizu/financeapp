@@ -23,6 +23,7 @@ import types.Transaction;
 import enums.Currency;
 import enums.Type;
 import enums.User;
+import gui.MainPanel;
 
 public class BigModel {
 	private ExpensesDatabase expenses;
@@ -72,7 +73,7 @@ public class BigModel {
 	public void add(double amount, Currency selectedCurrency, Type selectedType, Date timestamp, User selectedUser) {
 		expenses.add(amount, selectedCurrency, selectedType, timestamp, selectedUser);
 		listenerSupport.firePropertyChange("transactions", false, true);
-		listenerSupport.firePropertyChange("selectedTypeOutput", false, true);
+		listenerSupport.firePropertyChange("selectedType", false, true);
 		listenerSupport.firePropertyChange("selectedUser", false, true);
 		listenerSupport.firePropertyChange("averagePerDay", false, true);
 		doTheSave();
@@ -109,22 +110,18 @@ public class BigModel {
 		listenerSupport.firePropertyChange("selectedType", false, true);
 	}
 
-	public double setSelectedTypeOutput(Type val) {
+	public void setSelectedTypeOutput(Type val) {
 		this.selectedTypeOutput = val;
 		System.out.println("The total calculated for " + val + " is ");
 		listenerSupport.firePropertyChange("selectedTypeOutput", false, true);
-
-		double total = new Calculations().getTotal(getTransactions(), selectedTypeOutput);
-		return total;
-
-		// double avgDay = new Calculations().getAverages(getTransactions(), selectedTypeOutput);
-		// return avgDay;
+		double total = new Calculations().getTotal(getTransactions(), getSelectedTypeOutput());
 	}
 
 	public double getAveragePerDay() {
 		double avgDay = new Calculations().getAverages(getTransactions(), selectedTypeOutput);
 		return avgDay;
 	}
+	
 
 	public User getSelectedUser() {
 		return selectedUser;
