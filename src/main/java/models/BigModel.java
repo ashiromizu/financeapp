@@ -12,9 +12,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.poi.hpsf.ReadingNotSupportedException;
+
 import types.Amount;
 import types.Calculations;
 import types.ExpensesDatabase;
+import types.ReadXMLFile;
 import types.SaveToXMLFile;
 import types.Transaction;
 import enums.Currency;
@@ -28,7 +31,6 @@ public class BigModel {
 	private Type selectedTypeOutput;
 	private User selectedUser;
 
-
 	private PropertyChangeSupport listenerSupport;
 
 	public BigModel(ExpensesDatabase expenses) {
@@ -36,10 +38,16 @@ public class BigModel {
 		this.expenses = expenses;
 		this.selectedCurrency = Currency.NOK;
 		this.selectedType = Type.Supermarket;
-		this.selectedTypeOutput = Type.Supermarket;
+		this.selectedTypeOutput = Type.Food;
 		this.selectedUser = User.Akira;
+		doTheReading();
 	}
-	
+
+	public void doTheReading() {
+		ReadXMLFile reading = new ReadXMLFile();
+		reading.readFile();
+	}
+
 	public void doTheSave() {
 		SaveToXMLFile saving = new SaveToXMLFile(expenses);
 		saving.saveFile();
@@ -56,15 +64,15 @@ public class BigModel {
 	public List<Type> getTypes() {
 		return Arrays.asList(Type.values());
 	}
-	
-	public List<User> getUser(){
+
+	public List<User> getUser() {
 		return Arrays.asList(User.values());
 	}
 
 	public void add(double amount, Currency selectedCurrency, Type selectedType, Date timestamp, User selectedUser) {
 		expenses.add(amount, selectedCurrency, selectedType, timestamp, selectedUser);
 		listenerSupport.firePropertyChange("transactions", false, true);
-		listenerSupport.firePropertyChange("selectedTypeTotal", false, true);
+		listenerSupport.firePropertyChange("selectedTypeOutput", false, true);
 		listenerSupport.firePropertyChange("selectedUser", false, true);
 		listenerSupport.firePropertyChange("averagePerDay", false, true);
 		doTheSave();
@@ -104,17 +112,15 @@ public class BigModel {
 	public double setSelectedTypeOutput(Type val) {
 		this.selectedTypeOutput = val;
 		System.out.println("The total calculated for " + val + " is ");
-		listenerSupport.firePropertyChange("selectedTypeTotal", 0, 1);
-		
-		double avgDay = new Calculations().getAverages(getTransactions(), selectedTypeOutput);
-		return avgDay;
-	}
+		listenerSupport.firePropertyChange("selectedTypeOutput", false, true);
 
-	public double getSelectedTypeTotal() {
 		double total = new Calculations().getTotal(getTransactions(), selectedTypeOutput);
 		return total;
+
+		// double avgDay = new Calculations().getAverages(getTransactions(), selectedTypeOutput);
+		// return avgDay;
 	}
-	
+
 	public double getAveragePerDay() {
 		double avgDay = new Calculations().getAverages(getTransactions(), selectedTypeOutput);
 		return avgDay;
@@ -123,7 +129,7 @@ public class BigModel {
 	public User getSelectedUser() {
 		return selectedUser;
 	}
-	
+
 	public void setSelectedUser(User val) {
 		this.selectedUser = val;
 		System.out.println("the user is set to " + val);

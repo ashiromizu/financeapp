@@ -261,7 +261,6 @@ public class MainPanel extends JPanel {
 		if (evt.getKeyCode() == KeyEvent.VK_ENTER && jTextAmount.getText().length() > 0) {
 			System.out.println("ENTER pressed");
 			jButtonAddInputActionPerformed(null);
-			jTextAmount.setText(null);
 		}
 		if (evt.getKeyCode() == KeyEvent.VK_DOWN && model.getSelectedType().ordinal()< Type.values().length-1) {
 			System.out.println("DOWN arrow pressed");
@@ -273,20 +272,20 @@ public class MainPanel extends JPanel {
 			int id = model.getSelectedType().ordinal();
 			model.setSelectedType(Type.values()[id-1]);
 		}
-		if (evt.getKeyCode() == KeyEvent.VK_RIGHT && model.getSelectedUser().ordinal() < User.values().length-1) {
-			System.out.println("RIGHT arrow pressed");
-			int id = model.getSelectedUser().ordinal();
-			model.setSelectedUser(User.values()[id+1]);
-		}
-		if (evt.getKeyCode() == KeyEvent.VK_LEFT && model.getSelectedUser().ordinal()>0) {
-			System.out.println("LEFT arrow pressed");
-			int id = model.getSelectedUser().ordinal();
-			model.setSelectedUser(User.values()[id-1]);
-		}
+		//not used because it overlaps with the cursoR behavior
+//		if (evt.getKeyCode() == KeyEvent.VK_RIGHT && model.getSelectedUser().ordinal() < User.values().length-1) {
+//			System.out.println("RIGHT arrow pressed");
+//			int id = model.getSelectedUser().ordinal();
+//			model.setSelectedUser(User.values()[id+1]);
+//		}
+//		if (evt.getKeyCode() == KeyEvent.VK_LEFT && model.getSelectedUser().ordinal()>0) {
+//			System.out.println("LEFT arrow pressed");
+//			int id = model.getSelectedUser().ordinal();
+//			model.setSelectedUser(User.values()[id-1]);
+//		}
 	}// GEN-LAST:event_jAmountTextKeyPressed
 
 	private void jTextAmountFocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jAmountTextFocusLost
-		System.out.println("the amount was set to " + jTextAmount.getText() + " " + model.getSelectedCurrency() + " " + model.getSelectedType());
 	}// GEN-LAST:event_jAmountTextFocusLost
 
 	private void jTextAmountFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextField1FocusGained
@@ -300,6 +299,7 @@ public class MainPanel extends JPanel {
 		System.out.println("the timestamp is " + timestamp);
 		double amount = Double.parseDouble(amountStr);
 		model.add(amount, model.getSelectedCurrency(), model.getSelectedType(), timestamp, model.getSelectedUser());
+		jTextAmount.setText(null);
 	}// GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

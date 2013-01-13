@@ -13,35 +13,40 @@ import java.io.File;
 
 public class ReadXMLFile {
 
-	public static void main(String argv[]) {
-		 
-		  try {
-	 
-			File fXmlFile = new File("resultados.xml");
+public void readFile(){
+	
+
+		try {
+			File fXMLFile = new File("expenses.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-			doc.getDocumentElement().normalize();
+			Document document = dBuilder.parse(fXMLFile);
+			document.getDocumentElement().normalize();
 	 
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-			NodeList nList = doc.getElementsByTagName("staff");
+			
+			System.out.println("Root element :" + document.getDocumentElement().getNodeName());
+			NodeList nList = document.getElementsByTagName("expenses");
 			System.out.println("-----------------------");
 	 
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 	 
 			   Node nNode = nList.item(temp);
-			   if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			   
+			   if (nNode.getNodeType() == Node.ELEMENT_NODE) { // this ELEMENT_NODE command I don't understand what is it. How can you get which element to read
 	 
-			      Element eElement = (Element) nNode;
+			      Element eElement = (Element) nNode; //this is casting: Ask how would you code without it.
 	 
-			      System.out.println("First Name : " + getTagValue("firstname", eElement));
-			      System.out.println("Last Name : " + getTagValue("lastname", eElement));
-		              System.out.println("Nick Name : " + getTagValue("nickname", eElement));
-			      System.out.println("Salary : " + getTagValue("salary", eElement));
+			      System.out.println("uuid: " + getTagValue("uuid", eElement));
+			      System.out.println("currency: " + getTagValue("currency", eElement));
+		          System.out.println("amount: " + getTagValue("type", eElement));
+			      System.out.println("date: " + getTagValue("date", eElement));
+			      System.out.println("user: " + getTagValue("user", eElement));
+			      System.out.println("type: " + getTagValue("type", eElement));
 	 
 			   }
 			}
-		  } catch (Exception e) {
+		  }
+		catch (Exception e) {
 			e.printStackTrace();
 		  }
 	  }

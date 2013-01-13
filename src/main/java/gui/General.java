@@ -3,6 +3,7 @@ package gui;
 import javax.swing.JFrame;
 
 import types.ExpensesDatabase;
+import types.ReadXMLFile;
 
 import models.BigModel;
 

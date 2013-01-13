@@ -33,7 +33,7 @@ public class SaveToXMLFile {
 
 			Element root = document.createElement("Data"); // creamos el elemento raiz
 
-			Element input = document.createElement("Expenditure"); // creamos un nuevo elemento
+			Element input = document.createElement("Expenses"); // creamos un nuevo elemento
 
 			List<Transaction> transactions = database.getTransactions(); // Ingresamos la info
 
@@ -46,7 +46,7 @@ public class SaveToXMLFile {
 
 			Source source = new DOMSource(document);
 			
-			Result result = new StreamResult(new java.io.File("resultados.xml")); // nombre del archivo
+			Result result = new StreamResult(new java.io.File("expenses.xml")); // nombre del archivo
 			
 			Result console = new StreamResult(System.out);
 			
