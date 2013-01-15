@@ -2,19 +2,11 @@ package models;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
-import org.apache.poi.hpsf.ReadingNotSupportedException;
-
-import types.Amount;
 import types.Calculations;
 import types.ExpensesDatabase;
 import types.ReadXMLFile;
@@ -23,7 +15,6 @@ import types.Transaction;
 import enums.Currency;
 import enums.Type;
 import enums.User;
-import gui.MainPanel;
 
 public class BigModel {
 	private ExpensesDatabase expenses;
@@ -31,6 +22,7 @@ public class BigModel {
 	private Type selectedType;
 	private Type selectedTypeOutput;
 	private User selectedUser;
+	private double selectedTypeTotal;
 
 	private PropertyChangeSupport listenerSupport;
 
@@ -41,6 +33,7 @@ public class BigModel {
 		this.selectedType = Type.Supermarket;
 		this.selectedTypeOutput = Type.Food;
 		this.selectedUser = User.Akira;
+		this.selectedTypeTotal = Double.NaN;
 		doTheReading();
 	}
 
@@ -77,6 +70,7 @@ public class BigModel {
 		listenerSupport.firePropertyChange("selectedUser", false, true);
 		listenerSupport.firePropertyChange("averagePerDay", false, true);
 		doTheSave();
+		updateSelectedTypeTotal( );
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -94,6 +88,15 @@ public class BigModel {
 	public void setSelectedCurrency(Currency val) {
 		this.selectedCurrency = val;
 		System.out.println("i'm being set to " + val);
+	}
+
+	public double getSelectedTypeTotal() {
+		return selectedTypeTotal;
+	}
+
+	public void updateSelectedTypeTotal() {
+		double total = new Calculations().getTotal(getTransactions(), getSelectedTypeOutput());
+		listenerSupport.firePropertyChange("selectedTypeTotal", this.selectedTypeTotal, this.selectedTypeTotal = total);
 	}
 
 	public Type getSelectedType() {
@@ -114,14 +117,13 @@ public class BigModel {
 		this.selectedTypeOutput = val;
 		System.out.println("The total calculated for " + val + " is ");
 		listenerSupport.firePropertyChange("selectedTypeOutput", false, true);
-		double total = new Calculations().getTotal(getTransactions(), getSelectedTypeOutput());
+		updateSelectedTypeTotal( );
 	}
 
 	public double getAveragePerDay() {
 		double avgDay = new Calculations().getAverages(getTransactions(), selectedTypeOutput);
 		return avgDay;
 	}
-	
 
 	public User getSelectedUser() {
 		return selectedUser;
