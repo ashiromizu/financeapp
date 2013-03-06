@@ -6,6 +6,7 @@ import java.util.List;
 import org.joda.time.Days;
 
 import enums.Currency;
+import enums.Month;
 import enums.Type;
 
 public class Calculations {
@@ -40,8 +41,6 @@ public class Calculations {
 		}
 		
 		return 0;
-		
-		
 	}
 	
 }
